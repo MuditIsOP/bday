@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - Her Special Space</title>
+    <meta name="description" content="A personal space created with love">
+    <meta name="theme-color" content="#E6E6FA">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ===== CSS RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            /* Colors */
+            --color-lavender-primary: #E6E6FA;
+            --color-lavender-light: #F5F3FF;
+            --color-lavender-medium: #DCD0FF;
+            --color-lavender-accent: #B8A9D9;
+            --color-lavender-dark: #8B7AB8;
+            --color-text-primary: #6B5B95;
+            --color-soft-pink: #FFE4E1;
+            --color-cream: #FFF9E6;
+            --color-soft-blue: #E6F3FF;
+            --color-mint: #E6FFF0;
+            
+            /* Glassmorphism */
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-bg-medium: rgba(255, 255, 255, 0.2);
+            --glass-bg-strong: rgba(255, 255, 255, 0.3);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px rgba(139, 122, 184, 0.15);
+            
+            /* Typography */
+            --font-heading: 'Playfair Display', 'Georgia', serif;
+            --font-body: 'Inter', 'SF Pro Display', -apple-system, sans-serif;
+            --font-accent: 'Dancing Script', cursive;
+            
+            /* Spacing */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+            
+            /* Transitions */
+            --transition-fast: 150ms cubic-bezier(0.33, 1, 0.68, 1);
+            --transition-base: 300ms cubic-bezier(0.33, 1, 0.68, 1);
+            --transition-slow: 500ms cubic-bezier(0.33, 1, 0.68, 1);
+            --transition-bounce: 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text-primary);
+            line-height: 1.6;
+            background: linear-gradient(135deg, var(--color-lavender-light) 0%, var(--color-lavender-primary) 50%, var(--color-lavender-medium) 100%);
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+        
+        /* ===== UTILITY CLASSES ===== */
+        .hidden {
+            display: none !important;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--space-xl);
+        }
+        
+        /* ===== GLASSMORPHISM CARD ===== */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: var(--glass-shadow);
+            transition: all var(--transition-base);
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 48px rgba(139, 122, 184, 0.25);
+        }
+        
+        /* ===== PARTICLES BACKGROUND ===== */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8), rgba(230, 230, 250, 0.3));
+            border-radius: 50%;
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(50px);
+                opacity: 0;
+            }
+        }
+        
+        /* ===== NAVIGATION ===== */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: var(--space-lg) 0;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            animation: slideDown 500ms ease-out;
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+        
+        .nav-logo {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: var(--space-lg);
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        .nav-item a {
+            text-decoration: none;
+            color: var(--color-text-primary);
+            font-weight: 500;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: 8px;
+            transition: all var(--transition-fast);
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+        
+        .nav-item a:hover {
+            background: var(--glass-bg-medium);
+            transform: translateY(-2px);
+            color: var(--color-lavender-accent);
+        }
+        
+        /* ===== SECTIONS ===== */
+        .section {
+            min-height: 100vh;
+            padding: var(--space-3xl) var(--space-xl);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: var(--color-text-primary);
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.25rem;
+            color: var(--color-lavender-dark);
+            margin-bottom: var(--space-3xl);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* ===== MESSAGES SECTION ===== */
+        .message-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            justify-content: center;
+            margin-bottom: var(--space-2xl);
+        }
+        
+        .category-btn {
+            padding: var(--space-md) var(--space-lg);
+            border: 2px solid var(--glass-border);
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 50px;
+            color: var(--color-text-primary);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+        
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--color-lavender-accent);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .messages-grid {
+            display: grid;
+            gap: var(--space-xl);
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        }
+        
+        .envelope {
+            position: relative;
+            cursor: pointer;
+            padding: var(--space-xl);
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .envelope-icon {
+            font-size: 3rem;
+            margin-bottom: var(--space-md);
+        }
+        
+        .envelope-title {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .envelope-preview {
+            color: var(--color-lavender-dark);
+            font-size: 0.875rem;
+        }
+        
+        /* ===== MODAL ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(107, 91, 149, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-xl);
+        }
+        
+        .modal.active {
+            display: flex;
+            animation: fadeIn 300ms ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            background: var(--glass-bg-strong);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: var(--space-3xl);
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 16px 64px rgba(139, 122, 184, 0.3);
+            animation: scaleIn 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+        
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: var(--space-lg);
+            right: var(--space-lg);
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: var(--glass-bg-medium);
+            border-radius: 50%;
+            color: var(--color-text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-fast);
+        }
+        
+        .modal-close:hover {
+            background: var(--color-lavender-accent);
+            color: white;
+            transform: rotate(90deg);
+        }
+        
+        .modal-title {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .modal-text {
+            line-height: 1.8;
+            color: var(--color-text-primary);
+            font-size: 1.125rem;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .modal-content {
+                padding: var(--space-xl);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particles Background -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Main Content -->
+    <div id="main-content">
+        <!-- Navigation -->
+        <nav class="nav">
+            <div class="container nav-container">
+                <div class="nav-logo">Her Space</div>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="index.html">Home</a></li>
+                    <li class="nav-item"><a href="messages.html">Messages</a></li>
+                    <li class="nav-item"><a href="memories.html">Memories</a></li>
+                    <li class="nav-item"><a href="games.html">Games</a></li>
+                    <li class="nav-item"><a href="compliments.html">Compliments</a></li>
+                    <li class="nav-item"><a href="voice-notes.html">Voice</a></li>
+                    <li class="nav-item"><a href="music.html">Music</a></li>
+                    <li class="nav-item"><a href="jokes.html">Jokes</a></li>
+                    <li class="nav-item"><a href="countdown.html">Countdown</a></li>
+                </ul>
+            </div>
+        </nav>
+        
+        <!-- Messages Section -->
+        <section id="messages" class="section">
+            <div class="container">
+                <h2 class="section-title">Messages For You</h2>
+                <p class="section-subtitle">
+                    Open an envelope to read a special message
+                </p>
+                
+                <div class="message-categories">
+                    <button class="category-btn active" data-category="all">All Messages</button>
+                    <button class="category-btn" data-category="smile">When You Need A Smile</button>
+                    <button class="category-btn" data-category="down">Feeling Down</button>
+                    <button class="category-btn" data-category="motivation">Need Motivation</button>
+                    <button class="category-btn" data-category="appreciation">Appreciation</button>
+                </div>
+                
+                <div class="messages-grid" id="messages-grid"></div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close">×</button>
+            <h2 class="modal-title" id="modal-title"></h2>
+            <div class="modal-text" id="modal-text"></div>
+        </div>
+    </div>
+    
+    <script>
+        // Check authentication
+        if (localStorage.getItem('authenticated') !== 'true') {
+            window.location.href = 'index.html';
+        }
+        
+        // ===== MESSAGES DATA =====
+        const MESSAGES = {
+            smile: [
+                {
+                    title: "You're Amazing",
+                    content: "Just a quick reminder that you're absolutely incredible! Your smile has the power to brighten anyone's day, and your presence makes the world a better place. Never forget how special you are! 💜✨",
+                    emoji: "😊"
+                },
+                {
+                    title: "Thinking of You",
+                    content: "Hey beautiful! I just wanted you to know that you crossed my mind today and it made me smile. Your friendship means the world to me, and I'm so grateful to have you in my life. Keep being amazing! 🌟💖",
+                    emoji: "💭"
+                },
+                {
+                    title: "You Got This",
+                    content: "I believe in you more than you know! Whatever you're facing today, remember that you're stronger than any challenge. You've overcome so much already, and this is just another step in your amazing journey! 💪✨",
+                    emoji: "🌈"
+                }
+            ],
+            down: [
+                {
+                    title: "It's Okay to Feel",
+                    content: "Remember, it's perfectly okay to have difficult days. Your feelings are valid, and you don't have to be strong all the time. Take the time you need to heal and know that brighter days are ahead. I'm here for you! 💜🌙",
+                    emoji: "🌙"
+                },
+                {
+                    title: "This Too Shall Pass",
+                    content: "I know things seem tough right now, but storms don't last forever. You've weathered difficult times before, and you'll get through this too. Remember, after every dark night comes a beautiful sunrise. Stay strong! 🌅💖",
+                    emoji: "🌅"
+                },
+                {
+                    title: "You're Not Alone",
+                    content: "Even when it feels like the world is against you, remember that you're never truly alone. You have people who care about you deeply, and we're always here whenever you need us. Reach out anytime! 🤗💜",
+                    emoji: "🫂"
+                }
+            ],
+            motivation: [
+                {
+                    title: "Chase Your Dreams",
+                    content: "Your dreams are worth chasing! Don't let anyone tell you they're impossible. You have all the talent, strength, and determination you need to achieve amazing things. Take that first step today! 🚀✨",
+                    emoji: "🎯"
+                },
+                {
+                    title: "Keep Going",
+                    content: "Every step forward, no matter how small, is progress. Don't give up just because the journey is hard - the best views come after the hardest climbs. You're doing better than you think! 🏔️💪",
+                    emoji: "⛰️"
+                },
+                {
+                    title: "Believe in Yourself",
+                    content: "You are capable of so much more than you realize! Your potential is limitless, and the only thing holding you back is self-doubt. Trust yourself, take chances, and watch amazing things happen! 🌟💜",
+                    emoji: "✨"
+                }
+            ],
+            appreciation: [
+                {
+                    title: "Thank You",
+                    content: "I don't say this enough, but thank you for being you! Thank you for your kindness, your laughter, your support, and for making life infinitely better just by being in it. You're truly appreciated! 💝🙏",
+                    emoji: "🙏"
+                },
+                {
+                    title: "You Make a Difference",
+                    content: "I hope you know that you make a real difference in this world. Your actions, words, and presence create ripples of positivity that touch more lives than you realize. Never underestimate your impact! 🌊💫",
+                    emoji: "🌍"
+                },
+                {
+                    title: "Grateful for You",
+                    content: "I'm so incredibly grateful that our paths crossed! You've brought so much joy, laughter, and love into my life. Having you as a friend is one of the best gifts I've ever received. Thank you for being you! 🎁💜",
+                    emoji: "💝"
+                }
+            ]
+        };
+        
+        // Initialize particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        // Initialize messages
+        function initializeMessages() {
+            filterMessages('all');
+        }
+        
+        function filterMessages(category) {
+            const container = document.getElementById('messages-grid');
+            container.innerHTML = '';
+            
+            const messagesToShow = category === 'all' 
+                ? Object.entries(MESSAGES).flatMap(([cat, msgs]) => msgs.map(m => ({...m, category: cat})))
+                : MESSAGES[category] || [];
+            
+            messagesToShow.forEach((message, index) => {
+                const card = document.createElement('div');
+                card.className = 'glass-card envelope';
+                card.style.animationDelay = `${index * 100}ms`;
+                card.innerHTML = `
+                    <div class="envelope-icon">${message.emoji}</div>
+                    <h3 class="envelope-title">${message.title}</h3>
+                    <p class="envelope-preview">Click to open</p>
+                `;
+                card.addEventListener('click', () => openMessage(message));
+                container.appendChild(card);
+            });
+        }
+        
+        function openMessage(message) {
+            openModal(message.title + ' ' + message.emoji, message.content);
+        }
+        
+        // Modal functions
+        function openModal(title, content) {
+            document.getElementById('modal-title').innerHTML = title;
+            document.getElementById('modal-text').innerHTML = content;
+            document.getElementById('modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            initializeMessages();
+            
+            // Modal close
+            document.getElementById('modal-close').addEventListener('click', closeModal);
+            document.getElementById('modal').addEventListener('click', (e) => {
+                if (e.target.id === 'modal') closeModal();
+            });
+            
+            // Category filter
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    filterMessages(btn.dataset.category);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
