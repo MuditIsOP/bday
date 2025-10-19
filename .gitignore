@@ -1,0 +1,36 @@
+# Operating System
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Build artifacts (if you add build tools later)
+dist/
+build/
+node_modules/
+
+# Personal content (uncomment if you want to keep private photos/videos)
+# assets/images/memories/
+# assets/audio/
+# assets/video/
