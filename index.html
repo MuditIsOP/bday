@@ -956,18 +956,17 @@
         <!-- Navigation -->
         <nav class="nav">
             <div class="container nav-container">
-                <div class="nav-logo">💜 Her Space</div>
+                <div class="nav-logo">Her Space</div>
                 <ul class="nav-menu">
-                    <li class="nav-item"><a href="#home">🏠 Home</a></li>
-                    <li class="nav-item"><a href="#messages">💌 Messages</a></li>
-                    <li class="nav-item"><a href="#memories">📸 Memories</a></li>
-                    <li class="nav-item"><a href="#games">🎮 Games</a></li>
-                    <li class="nav-item"><a href="#compliments">💝 Compliments</a></li>
-                    <li class="nav-item"><a href="#voice-notes">🎤 Voice</a></li>
-                    <li class="nav-item"><a href="#videos">🎬 Videos</a></li>
-                    <li class="nav-item"><a href="#music">🎵 Music</a></li>
-                    <li class="nav-item"><a href="#jokes">😂 Jokes</a></li>
-                    <li class="nav-item"><a href="#countdown">⏰ Countdown</a></li>
+                    <li class="nav-item"><a href="index.html">Home</a></li>
+                    <li class="nav-item"><a href="messages.html">Messages</a></li>
+                    <li class="nav-item"><a href="memories.html">Memories</a></li>
+                    <li class="nav-item"><a href="games.html">Games</a></li>
+                    <li class="nav-item"><a href="compliments.html">Compliments</a></li>
+                    <li class="nav-item"><a href="voice-notes.html">Voice</a></li>
+                    <li class="nav-item"><a href="music.html">Music</a></li>
+                    <li class="nav-item"><a href="jokes.html">Jokes</a></li>
+                    <li class="nav-item"><a href="countdown.html">Countdown</a></li>
                 </ul>
             </div>
         </nav>
@@ -984,11 +983,10 @@
                 <p class="hero-subtitle">
                     A special place filled with love, memories, and everything that makes you smile 💜
                 </p>
-                <a href="#messages" class="hero-cta">
+                <a href="messages.html" class="hero-cta">
                     Start Exploring ✨
                 </a>
             </div>
-            <div class="scroll-indicator">↓</div>
         </section>
         
         <!-- Quick Access Section -->
@@ -1045,159 +1043,7 @@
             </div>
         </section>
         
-        <!-- Messages Section -->
-        <section id="messages" class="section">
-            <div class="container">
-                <h2 class="section-title">Messages For You 💌</h2>
-                <p class="section-subtitle">
-                    Open an envelope to read a special message
-                </p>
-                
-                <div class="message-categories">
-                    <button class="category-btn active" data-category="all">All Messages</button>
-                    <button class="category-btn" data-category="smile">When You Need A Smile</button>
-                    <button class="category-btn" data-category="down">Feeling Down</button>
-                    <button class="category-btn" data-category="motivation">Need Motivation</button>
-                    <button class="category-btn" data-category="appreciation">Appreciation</button>
-                </div>
-                
-                <div class="messages-grid" id="messages-grid"></div>
-            </div>
-        </section>
-        
-        <!-- Memories Gallery -->
-        <section id="memories" class="section">
-            <div class="container">
-                <h2 class="section-title">Our Beautiful Memories 📸</h2>
-                <p class="section-subtitle">
-                    Every moment we've shared, captured forever
-                </p>
-                
-                <div class="gallery" id="gallery"></div>
-            </div>
-        </section>
-        
-        <!-- Games Section -->
-        <section id="games" class="section">
-            <div class="container">
-                <h2 class="section-title">Fun & Games 🎮</h2>
-                <p class="section-subtitle">
-                    Take a break and have some fun!
-                </p>
-                
-                <div class="grid">
-                    <div class="glass-card game-card" onclick="openGame('quiz')">
-                        <div class="game-icon">🧠</div>
-                        <h3 class="game-title">Friendship Quiz</h3>
-                        <p class="game-description">
-                            Test how well you know our friendship!
-                        </p>
-                    </div>
-                    <div class="glass-card game-card" onclick="openGame('memory')">
-                        <div class="game-icon">🃏</div>
-                        <h3 class="game-title">Memory Match</h3>
-                        <p class="game-description">
-                            Match the cards and test your memory
-                        </p>
-                    </div>
-                    <div class="glass-card game-card" onclick="openGame('wheel')">
-                        <div class="game-icon">🎡</div>
-                        <h3 class="game-title">Mood Wheel</h3>
-                        <p class="game-description">
-                            Spin the wheel for a surprise!
-                        </p>
-                    </div>
-                    <div class="glass-card game-card" onclick="openGame('puzzle')">
-                        <div class="game-icon">🧩</div>
-                        <h3 class="game-title">Jigsaw Puzzle</h3>
-                        <p class="game-description">
-                            Piece together beautiful memories
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Compliments Section -->
-        <section id="compliments" class="section">
-            <div class="container">
-                <h2 class="section-title">You Are Amazing 💝</h2>
-                <p class="section-subtitle">
-                    Here's a reminder of how wonderful you are
-                </p>
-                
-                <div class="compliment-container">
-                    <div class="compliment-display">
-                        <p class="compliment-text" id="compliment-text">
-                            Click the button to receive your compliment! 💜
-                        </p>
-                    </div>
-                    <button class="compliment-btn" id="generate-compliment">
-                        ✨ Generate Compliment ✨
-                    </button>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Voice Notes Section -->
-        <section id="voice-notes" class="section">
-            <div class="container">
-                <h2 class="section-title">Voice Notes 🎤</h2>
-                <p class="section-subtitle">
-                    Personal audio messages just for you
-                </p>
-                
-                <div class="media-list" id="voice-notes-list"></div>
-            </div>
-        </section>
-        
-        <!-- Videos Section -->
-        <section id="videos" class="section">
-            <div class="container">
-                <h2 class="section-title">Video Messages 🎬</h2>
-                <p class="section-subtitle">
-                    Special video messages from the heart
-                </p>
-                
-                <div class="media-list" id="videos-list"></div>
-            </div>
-        </section>
-        
-        <!-- Music Section -->
-        <section id="music" class="section">
-            <div class="container">
-                <h2 class="section-title">Our Soundtrack 🎵</h2>
-                <p class="section-subtitle">
-                    Songs that remind me of you
-                </p>
-                
-                <div class="grid" id="music-grid"></div>
-            </div>
-        </section>
-        
-        <!-- Inside Jokes Section -->
-        <section id="jokes" class="section">
-            <div class="container">
-                <h2 class="section-title">Inside Jokes 😂</h2>
-                <p class="section-subtitle">
-                    Our hilarious moments that only we understand
-                </p>
-                
-                <div class="grid" id="jokes-grid"></div>
-            </div>
-        </section>
-        
-        <!-- Countdown Section -->
-        <section id="countdown" class="section">
-            <div class="container">
-                <h2 class="section-title">Special Moments ⏰</h2>
-                <p class="section-subtitle">
-                    Counting down to the moments that matter
-                </p>
-                
-                <div class="countdown-grid" id="countdown-grid"></div>
-            </div>
-        </section>
+
     </div>
     
     <!-- Modal -->
@@ -1567,35 +1413,7 @@
             // Initialize particles
             createParticles();
             
-            // Initialize all sections
-            initializeMessages();
-            initializeGallery();
-            initializeVoiceNotes();
-            initializeVideos();
-            initializeMusic();
-            initializeJokes();
-            initializeCountdowns();
-            
-            // Modal close
-            document.getElementById('modal-close').addEventListener('click', closeModal);
-            document.getElementById('modal').addEventListener('click', (e) => {
-                if (e.target.id === 'modal') closeModal();
-            });
-            
-            // Compliment generator
-            document.getElementById('generate-compliment').addEventListener('click', generateCompliment);
-            
-            // Category filter
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    filterMessages(btn.dataset.category);
-                });
-            });
-            
-            // Scroll animation
-            observeElements();
+
         });
         
         function checkPassword() {
