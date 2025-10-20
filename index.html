@@ -397,6 +397,7 @@
             padding: var(--space-3xl) var(--space-xl);
             position: relative;
             z-index: 2;
+            padding-bottom: calc(var(--space-3xl) + 100px);
         }
         
         .hero-container {
@@ -415,7 +416,20 @@
         }
         
         .hero-images {
-            display: none;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-xl);
+            margin-top: var(--space-3xl);
+            width: 100%;
+            max-width: 600px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 800ms ease-out, transform 800ms ease-out;
+        }
+        
+        .hero-images.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .hero-image-card {
@@ -453,7 +467,7 @@
         
         /* Floating Hearts Animation */
         .floating-hearts {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -1228,6 +1242,9 @@
     <!-- Particles Background -->
     <div class="particles" id="particles"></div>
     
+    <!-- Floating Hearts (Global) -->
+    <div class="floating-hearts" id="floating-hearts"></div>
+    
     <!-- Password Auth Overlay -->
     <div id="auth-overlay">
         <div class="auth-container">
@@ -1276,7 +1293,6 @@
         
         <!-- Hero Section -->
         <section id="home" class="hero">
-            <div class="floating-hearts" id="floating-hearts"></div>
             <div class="hero-container">
                 <div class="hero-content">
                     <h1 class="hero-title">
@@ -1291,20 +1307,6 @@
                     <a href="messages.html" class="hero-cta">
                         Start Exploring ✨
                     </a>
-                    <div class="hero-messages">
-                        <div class="message-card">
-                            <span class="message-arrow">→</span>
-                            <span class="message-text">Every moment with you is precious</span>
-                        </div>
-                        <div class="message-card">
-                            <span class="message-arrow">→</span>
-                            <span class="message-text">You bring so much joy to life</span>
-                        </div>
-                        <div class="message-card">
-                            <span class="message-arrow">→</span>
-                            <span class="message-text">This space is all about you</span>
-                        </div>
-                    </div>
                 </div>
                 <div class="hero-images">
                     <div class="hero-image-card">
@@ -1362,60 +1364,6 @@
                 </div>
                 <div class="content-image">
                     <div class="content-image-placeholder">🎀</div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Quick Access Section -->
-        <section class="section" style="min-height: auto;">
-            <div class="container">
-                <h2 class="section-title">Explore Everything</h2>
-                <p class="section-subtitle">
-                    Each section is filled with love and care, just for you
-                </p>
-                <div class="grid">
-                    <div class="glass-card card" style="animation-delay: 0ms;">
-                        <div class="card-icon">💌</div>
-                        <h3 class="card-title">Messages</h3>
-                        <p class="card-description">
-                            Heartfelt messages for every mood and moment
-                        </p>
-                    </div>
-                    <div class="glass-card card" style="animation-delay: 100ms;">
-                        <div class="card-icon">📸</div>
-                        <h3 class="card-title">Memories</h3>
-                        <p class="card-description">
-                            Our beautiful moments captured in time
-                        </p>
-                    </div>
-                    <div class="glass-card card" style="animation-delay: 200ms;">
-                        <div class="card-icon">🎮</div>
-                        <h3 class="card-title">Games</h3>
-                        <p class="card-description">
-                            Fun games to brighten your day
-                        </p>
-                    </div>
-                    <div class="glass-card card" style="animation-delay: 300ms;">
-                        <div class="card-icon">💝</div>
-                        <h3 class="card-title">Compliments</h3>
-                        <p class="card-description">
-                            Daily reminders of how amazing you are
-                        </p>
-                    </div>
-                    <div class="glass-card card" style="animation-delay: 400ms;">
-                        <div class="card-icon">🎤</div>
-                        <h3 class="card-title">Voice Notes</h3>
-                        <p class="card-description">
-                            Personal messages just for you
-                        </p>
-                    </div>
-                    <div class="glass-card card" style="animation-delay: 500ms;">
-                        <div class="card-icon">⏰</div>
-                        <h3 class="card-title">Countdowns</h3>
-                        <p class="card-description">
-                            Counting down to special moments
-                        </p>
-                    </div>
                 </div>
             </div>
         </section>
@@ -2206,6 +2154,12 @@
             document.querySelectorAll('.content-row').forEach(el => {
                 observer.observe(el);
             });
+            
+            // Observe hero images
+            const heroImages = document.querySelector('.hero-images');
+            if (heroImages) {
+                observer.observe(heroImages);
+            }
         }
         
         // Initialize scroll animations after unlock

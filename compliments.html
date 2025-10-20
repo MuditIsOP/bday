@@ -43,9 +43,49 @@
             background: #8B7AB8;
             transform: translateY(-2px);
         }
+        
+        /* Floating Hearts Animation */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            color: #B8A9D9;
+            animation: floatHeart 8s infinite ease-in-out;
+            opacity: 0;
+        }
+        
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Floating Hearts (Global) -->
+    <div class="floating-hearts" id="floating-hearts"></div>
+    
     <div class="container">
         <h1>Coming Soon</h1>
         <p>This section is being set up on its own page.</p>
@@ -55,6 +95,28 @@
         if (localStorage.getItem('authenticated') !== 'true') {
             window.location.href = 'index.html';
         }
+        
+        // Create floating hearts
+        function createFloatingHearts() {
+            const container = document.getElementById('floating-hearts');
+            if (!container) return;
+            
+            const heartCount = 15;
+            const hearts = ['💜', '💖', '💗', '💓', '💕'];
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 8 + 's';
+                heart.style.animationDuration = (6 + Math.random() * 4) + 's';
+                heart.style.fontSize = (1.5 + Math.random() * 1) + 'rem';
+                container.appendChild(heart);
+            }
+        }
+        
+        createFloatingHearts();
     </script>
 </body>
 </html>
