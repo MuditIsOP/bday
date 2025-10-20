@@ -310,7 +310,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             gap: var(--space-md);
         }
         
@@ -325,7 +325,7 @@
             display: flex;
             gap: var(--space-lg);
             list-style: none;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
         }
         
         .nav-item a {
@@ -349,11 +349,21 @@
         /* ===== MOBILE NAVIGATION ===== */
         .nav-toggle {
             display: none;
-            background: none;
-            border: none;
+            background: var(--glass-bg-medium);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
             cursor: pointer;
             padding: var(--space-sm);
             z-index: 1001;
+            transition: all var(--transition-base);
+        }
+        
+        .nav-toggle:hover {
+            background: var(--glass-bg-strong);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(139, 122, 184, 0.2);
         }
         
         .nav-toggle span {
@@ -390,9 +400,8 @@
         }
         
         .hero-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-3xl);
+            display: flex;
+            flex-direction: column;
             align-items: center;
             max-width: 1200px;
             margin: 0 auto;
@@ -400,15 +409,13 @@
         }
         
         .hero-content {
-            text-align: left;
+            text-align: center;
             animation: fadeInUp 1s ease-out;
+            width: 100%;
         }
         
         .hero-images {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: var(--space-lg);
-            animation: fadeInUp 1.2s ease-out;
+            display: none;
         }
         
         .hero-image-card {
@@ -558,6 +565,9 @@
             color: var(--color-lavender-dark);
             margin-bottom: var(--space-2xl);
             animation: fadeInUp 800ms ease-out 600ms backwards;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .hero-cta {
@@ -1082,11 +1092,6 @@
                 display: block;
             }
             
-            .hero-container {
-                grid-template-columns: 1fr;
-                gap: var(--space-xl);
-            }
-            
             .hero-content {
                 text-align: center;
             }
@@ -1128,6 +1133,94 @@
         .fade-in-on-scroll.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+        
+        /* ===== CONTENT SECTIONS WITH IMAGES ===== */
+        .content-section {
+            padding: var(--space-3xl) var(--space-xl);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .content-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-3xl);
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto var(--space-3xl);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 800ms ease-out, transform 800ms ease-out;
+        }
+        
+        .content-row.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .content-row.reverse {
+            direction: rtl;
+        }
+        
+        .content-row.reverse > * {
+            direction: ltr;
+        }
+        
+        .content-text {
+            padding: var(--space-xl);
+        }
+        
+        .content-text h2 {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .content-text p {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--color-lavender-dark);
+        }
+        
+        .content-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+            box-shadow: var(--glass-shadow);
+            background: var(--glass-bg-medium);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            aspect-ratio: 1;
+            transition: transform var(--transition-base);
+        }
+        
+        .content-image:hover {
+            transform: scale(1.05);
+        }
+        
+        .content-image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            background: linear-gradient(135deg, var(--color-lavender-light), var(--color-lavender-medium));
+        }
+        
+        @media (max-width: 768px) {
+            .content-row {
+                grid-template-columns: 1fr;
+                gap: var(--space-xl);
+            }
+            
+            .content-row.reverse {
+                direction: ltr;
+            }
         }
     </style>
 </head>
@@ -1226,6 +1319,49 @@
                     <div class="hero-image-card">
                         <div class="hero-image-placeholder">🎀</div>
                     </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Content Sections with Images -->
+        <section class="content-section">
+            <div class="content-row">
+                <div class="content-image">
+                    <div class="content-image-placeholder">💜</div>
+                </div>
+                <div class="content-text">
+                    <h2>Every Moment Matters</h2>
+                    <p>Each moment we share becomes a cherished memory. From laughter to quiet conversations, every experience together adds to our beautiful journey. You make ordinary days extraordinary.</p>
+                </div>
+            </div>
+            
+            <div class="content-row reverse">
+                <div class="content-text">
+                    <h2>Celebrating You</h2>
+                    <p>This space is dedicated to celebrating everything that makes you special. Your kindness, your smile, your unique perspective on life - all of it deserves to be honored and remembered.</p>
+                </div>
+                <div class="content-image">
+                    <div class="content-image-placeholder">✨</div>
+                </div>
+            </div>
+            
+            <div class="content-row">
+                <div class="content-image">
+                    <div class="content-image-placeholder">🌸</div>
+                </div>
+                <div class="content-text">
+                    <h2>Building Memories</h2>
+                    <p>Together we've created countless wonderful memories, and there are so many more to come. Each adventure, each laugh, each shared moment becomes part of our story.</p>
+                </div>
+            </div>
+            
+            <div class="content-row reverse">
+                <div class="content-text">
+                    <h2>Your Special Place</h2>
+                    <p>This is your corner of the internet, filled with love and care. Whenever you need a smile, a reminder of how amazing you are, or just want to revisit our memories, this place is here for you.</p>
+                </div>
+                <div class="content-image">
+                    <div class="content-image-placeholder">🎀</div>
                 </div>
             </div>
         </section>
@@ -2065,7 +2201,19 @@
             document.querySelectorAll('.fade-in-on-scroll').forEach(el => {
                 observer.observe(el);
             });
+            
+            // Observe content rows
+            document.querySelectorAll('.content-row').forEach(el => {
+                observer.observe(el);
+            });
         }
+        
+        // Initialize scroll animations after unlock
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                observeElements();
+            }, 1000);
+        });
         
         // Add fadeout animation
         const style = document.createElement('style');
