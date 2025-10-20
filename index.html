@@ -346,20 +346,192 @@
             color: var(--color-lavender-accent);
         }
         
+        /* ===== MOBILE NAVIGATION ===== */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: var(--space-sm);
+            z-index: 1001;
+        }
+        
+        .nav-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: var(--color-text-primary);
+            margin: 5px 0;
+            transition: all var(--transition-base);
+            border-radius: 2px;
+        }
+        
+        .nav-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+        
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .nav-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+        
         /* ===== HERO SECTION ===== */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
             padding: var(--space-3xl) var(--space-xl);
             position: relative;
             z-index: 2;
         }
         
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-3xl);
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
         .hero-content {
+            text-align: left;
             animation: fadeInUp 1s ease-out;
+        }
+        
+        .hero-images {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-lg);
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        .hero-image-card {
+            aspect-ratio: 1;
+            background: var(--glass-bg-medium);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--glass-shadow);
+            transition: transform var(--transition-base);
+            position: relative;
+        }
+        
+        .hero-image-card:hover {
+            transform: translateY(-8px) scale(1.05);
+        }
+        
+        .hero-image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .hero-image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--color-lavender-light), var(--color-lavender-medium));
+        }
+        
+        /* Floating Hearts Animation */
+        .floating-hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            color: var(--color-lavender-accent);
+            animation: floatHeart 8s infinite ease-in-out;
+            opacity: 0;
+        }
+        
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Message Cards with Arrows */
+        .hero-messages {
+            margin-top: var(--space-2xl);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+        
+        .message-card {
+            background: var(--glass-bg-medium);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: var(--space-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            animation: slideInRight 0.8s ease-out backwards;
+            transition: all var(--transition-base);
+        }
+        
+        .message-card:hover {
+            transform: translateX(8px);
+            box-shadow: 0 8px 24px rgba(139, 122, 184, 0.3);
+        }
+        
+        .message-card:nth-child(1) { animation-delay: 1s; }
+        .message-card:nth-child(2) { animation-delay: 1.2s; }
+        .message-card:nth-child(3) { animation-delay: 1.4s; }
+        
+        .message-arrow {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .message-text {
+            font-family: var(--font-accent);
+            font-size: 1.125rem;
+            color: var(--color-text-primary);
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
         
         .hero-title {
@@ -886,7 +1058,41 @@
             }
             
             .nav-menu {
-                display: none;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 280px;
+                background: var(--glass-bg-strong);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border-left: 1px solid var(--glass-border);
+                flex-direction: column;
+                padding: var(--space-3xl) var(--space-xl);
+                transition: right var(--transition-base);
+                box-shadow: -8px 0 32px rgba(139, 122, 184, 0.2);
+                z-index: 1000;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .nav-toggle {
+                display: block;
+            }
+            
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: var(--space-xl);
+            }
+            
+            .hero-content {
+                text-align: center;
+            }
+            
+            .hero-messages {
+                margin-top: var(--space-xl);
             }
             
             .countdown-value {
@@ -957,7 +1163,12 @@
         <nav class="nav">
             <div class="container nav-container">
                 <div class="nav-logo">Her Space</div>
-                <ul class="nav-menu">
+                <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="nav-menu">
                     <li class="nav-item"><a href="index.html">Home</a></li>
                     <li class="nav-item"><a href="messages.html">Messages</a></li>
                     <li class="nav-item"><a href="memories.html">Memories</a></li>
@@ -965,7 +1176,6 @@
                     <li class="nav-item"><a href="compliments.html">Compliments</a></li>
                     <li class="nav-item"><a href="voice-notes.html">Voice</a></li>
                     <li class="nav-item"><a href="music.html">Music</a></li>
-                    <li class="nav-item"><a href="jokes.html">Jokes</a></li>
                     <li class="nav-item"><a href="countdown.html">Countdown</a></li>
                 </ul>
             </div>
@@ -973,19 +1183,50 @@
         
         <!-- Hero Section -->
         <section id="home" class="hero">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    <span>Welcome</span>
-                    <span>To</span>
-                    <span>Your</span>
-                    <span>Space</span>
-                </h1>
-                <p class="hero-subtitle">
-                    A special place filled with love, memories, and everything that makes you smile 💜
-                </p>
-                <a href="messages.html" class="hero-cta">
-                    Start Exploring ✨
-                </a>
+            <div class="floating-hearts" id="floating-hearts"></div>
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <span>Welcome</span>
+                        <span>To</span>
+                        <span>Your</span>
+                        <span>Space</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        A special place filled with love, memories, and everything that makes you smile 💜
+                    </p>
+                    <a href="messages.html" class="hero-cta">
+                        Start Exploring ✨
+                    </a>
+                    <div class="hero-messages">
+                        <div class="message-card">
+                            <span class="message-arrow">→</span>
+                            <span class="message-text">Every moment with you is precious</span>
+                        </div>
+                        <div class="message-card">
+                            <span class="message-arrow">→</span>
+                            <span class="message-text">You bring so much joy to life</span>
+                        </div>
+                        <div class="message-card">
+                            <span class="message-arrow">→</span>
+                            <span class="message-text">This space is all about you</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-images">
+                    <div class="hero-image-card">
+                        <div class="hero-image-placeholder">💜</div>
+                    </div>
+                    <div class="hero-image-card">
+                        <div class="hero-image-placeholder">✨</div>
+                    </div>
+                    <div class="hero-image-card">
+                        <div class="hero-image-placeholder">🌸</div>
+                    </div>
+                    <div class="hero-image-card">
+                        <div class="hero-image-placeholder">🎀</div>
+                    </div>
+                </div>
             </div>
         </section>
         
@@ -1352,45 +1593,6 @@
             }
         ];
         
-        // ===== INSIDE JOKES DATA =====
-        const JOKES = [
-            {
-                title: "The Coffee Incident",
-                description: "Remember when we accidentally ordered 10 coffees instead of 1? Still laughing about that chaos! ☕😂",
-                emoji: "☕",
-                date: "2024-02-14"
-            },
-            {
-                title: "Autocorrect Disaster",
-                description: "That text message that autocorrect completely destroyed... we couldn't stop laughing for hours! 📱💀",
-                emoji: "📱",
-                date: "2024-03-20"
-            },
-            {
-                title: "The Dance Floor",
-                description: "Our spontaneous dance party in the middle of the store. Worth the embarrassment! 💃🕺",
-                emoji: "💃",
-                date: "2024-04-05"
-            },
-            {
-                title: "Food Adventures",
-                description: "When we tried that weird food combo and immediately regretted it! Never again! 🤢😂",
-                emoji: "🍕",
-                date: "2024-05-18"
-            },
-            {
-                title: "That One Quote",
-                description: "You know which one I'm talking about... we can't hear it without cracking up! 🗣️✨",
-                emoji: "💬",
-                date: "2024-06-22"
-            },
-            {
-                title: "The Lost Adventure",
-                description: "Getting completely lost but turning it into the best adventure ever! Best mistake we made! ��️❌",
-                emoji: "🗺️",
-                date: "2024-07-30"
-            }
-        ];
         
         // ===== PASSWORD AUTHENTICATION =====
         let attemptCount = 0;
@@ -1413,7 +1615,35 @@
             // Initialize particles
             createParticles();
             
-
+            // Mobile navigation toggle
+            const navToggle = document.getElementById('nav-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            
+            if (navToggle) {
+                navToggle.addEventListener('click', () => {
+                    navToggle.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+                
+                // Close menu when clicking on a link
+                navMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navToggle.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    });
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                        navToggle.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Create floating hearts
+            createFloatingHearts();
         });
         
         function checkPassword() {
@@ -1471,6 +1701,26 @@
                 particle.style.animationDelay = Math.random() * 20 + 's';
                 particle.style.animationDuration = (15 + Math.random() * 10) + 's';
                 container.appendChild(particle);
+            }
+        }
+        
+        // ===== FLOATING HEARTS =====
+        function createFloatingHearts() {
+            const container = document.getElementById('floating-hearts');
+            if (!container) return;
+            
+            const heartCount = 15;
+            const hearts = ['💜', '💖', '💗', '💓', '💕'];
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 8 + 's';
+                heart.style.animationDuration = (6 + Math.random() * 4) + 's';
+                heart.style.fontSize = (1.5 + Math.random() * 1) + 'rem';
+                container.appendChild(heart);
             }
         }
         
@@ -1649,35 +1899,6 @@
             `);
         }
         
-        // ===== INSIDE JOKES =====
-        function initializeJokes() {
-            const container = document.getElementById('jokes-grid');
-            
-            JOKES.forEach((joke, index) => {
-                const card = document.createElement('div');
-                card.className = 'glass-card card';
-                card.style.animationDelay = `${index * 100}ms`;
-                card.innerHTML = `
-                    <div class="card-icon">${joke.emoji}</div>
-                    <h3 class="card-title">${joke.title}</h3>
-                    <p class="card-description">${joke.description.substring(0, 100)}...</p>
-                    <p style="font-size: 0.875rem; color: var(--color-lavender-accent); margin-top: 0.5rem;">
-                        ${formatDate(joke.date)}
-                    </p>
-                `;
-                card.addEventListener('click', () => openJoke(joke));
-                container.appendChild(card);
-            });
-        }
-        
-        function openJoke(joke) {
-            openModal(joke.title + ' ' + joke.emoji, `
-                <p style="line-height: 1.8;">${joke.description}</p>
-                <p style="text-align: center; margin-top: 1.5rem; color: var(--color-lavender-accent);">
-                    ${formatDate(joke.date)}
-                </p>
-            `);
-        }
         
         // ===== COUNTDOWNS =====
         function initializeCountdowns() {
