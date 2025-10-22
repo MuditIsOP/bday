@@ -1236,6 +1236,27 @@
                 direction: ltr;
             }
         }
+        
+        /* ===== FOOTER ===== */
+        .footer {
+            position: relative;
+            z-index: 2;
+            padding: var(--space-3xl) var(--space-xl);
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-text {
+            font-family: var(--font-accent);
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            font-weight: 600;
+            color: var(--color-text-primary);
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+        }
     </style>
 </head>
 <body>
@@ -1338,12 +1359,12 @@
             </div>
             
             <div class="content-row reverse">
+                <div class="content-image">
+                    <div class="content-image-placeholder">✨</div>
+                </div>
                 <div class="content-text">
                     <h2>Celebrating You</h2>
                     <p>This space is dedicated to celebrating everything that makes you special. Your kindness, your smile, your unique perspective on life - all of it deserves to be honored and remembered.</p>
-                </div>
-                <div class="content-image">
-                    <div class="content-image-placeholder">✨</div>
                 </div>
             </div>
             
@@ -1358,15 +1379,22 @@
             </div>
             
             <div class="content-row reverse">
+                <div class="content-image">
+                    <div class="content-image-placeholder">🎀</div>
+                </div>
                 <div class="content-text">
                     <h2>Your Special Place</h2>
                     <p>This is your corner of the internet, filled with love and care. Whenever you need a smile, a reminder of how amazing you are, or just want to revisit our memories, this place is here for you.</p>
                 </div>
-                <div class="content-image">
-                    <div class="content-image-placeholder">🎀</div>
-                </div>
             </div>
         </section>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p class="footer-text">Made with 💜 by Dutu for Sera Cutu</p>
+            </div>
+        </footer>
         
 
     </div>
