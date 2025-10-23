@@ -688,9 +688,7 @@
             left: 50%;
             transform: translateX(-50%);
             z-index: 1000;
-            width: 100%;
-            max-width: 28rem; /* 448px */
-            padding: 0.75rem 1rem;
+            padding: 0.75rem 1.5rem;
             background: rgba(255, 255, 255, 0.35); /* Increased opacity for better coverage */
             backdrop-filter: blur(25px) saturate(180%); /* Increased blur for better glassmorphism */
             -webkit-backdrop-filter: blur(25px) saturate(180%);
@@ -718,9 +716,9 @@
 
         .nav-container {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            flex-wrap: nowrap;
+            flex-wrap: wrap;
             gap: var(--space-md);
         }
 
@@ -730,13 +728,18 @@
             font-weight: 700;
             color: var(--color-text-primary);
             white-space: nowrap;
+            width: 100%;
+            text-align: center;
+            margin-bottom: var(--space-xs);
         }
 
         .nav-menu {
             display: flex;
-            gap: var(--space-md);
+            gap: var(--space-sm);
             list-style: none;
-            flex-wrap: nowrap;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
         }
 
         .nav-item a {
@@ -810,11 +813,11 @@
         /* Mobile menu dropdown */
         .mobile-menu {
             position: fixed;
-            top: calc(1rem + 60px); /* Position below the nav bar */
+            top: calc(1rem + 80px); /* Position below the nav bar */
             left: 50%;
             transform: translateX(-50%);
             width: calc(100% - 2rem);
-            max-width: 28rem; /* 448px */
+            max-width: 500px;
             background: rgba(255, 255, 255, 0.35); /* Increased opacity for better coverage */
             backdrop-filter: blur(25px) saturate(180%); /* Increased blur for better glassmorphism */
             -webkit-backdrop-filter: blur(25px) saturate(180%);
@@ -866,12 +869,34 @@
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-            .nav-menu {
+            .nav {
+                padding: 0.75rem 1rem;
+            }
+
+            .nav-logo {
+                font-size: 1.25rem;
+            }
+
+            .nav-container .nav-menu {
                 display: none;
+            }
+
+            .mobile-menu .nav-menu {
+                display: flex;
             }
             
             .nav-toggle {
                 display: block;
+                position: absolute;
+                right: 1rem;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .nav-container {
+                position: relative;
+                flex-direction: column;
+                width: 100%;
             }
             
             /* Adjust content padding for mobile */
