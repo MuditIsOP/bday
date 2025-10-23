@@ -685,29 +685,33 @@
         .nav {
             position: fixed;
             top: 1rem;
-            left: 0;
-            right: 0;
-            margin: 0 auto;
-            z-index: 2000;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
             width: 100%;
             max-width: 28rem; /* 448px */
             padding: 0.75rem 1rem;
-            background: rgba(255, 255, 255, 0.2); /* Increased opacity for better visibility */
-            backdrop-filter: blur(15px); /* Increased blur for better effect */
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(139, 122, 184, 0.3); /* Increased opacity of accent color */
+            background: rgba(255, 255, 255, 0.35); /* Increased opacity for better coverage */
+            backdrop-filter: blur(25px) saturate(180%); /* Increased blur for better glassmorphism */
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid rgba(139, 122, 184, 0.4); /* Increased opacity of accent color */
             border-radius: 1rem;
             box-shadow: 0 8px 32px rgba(139, 122, 184, 0.2);
-            animation: slideDown 500ms ease-out;
+            opacity: 0;
+            transform: translateX(-50%) translateY(-100%);
+        }
+        
+        .nav.show {
+            animation: slideDown 500ms ease-out forwards;
         }
 
         @keyframes slideDown {
             from {
-                transform: translateY(-100%);
+                transform: translateX(-50%) translateY(-100%);
                 opacity: 0;
             }
             to {
-                transform: translateY(0);
+                transform: translateX(-50%) translateY(0);
                 opacity: 1;
             }
         }
@@ -807,19 +811,18 @@
         .mobile-menu {
             position: fixed;
             top: calc(1rem + 60px); /* Position below the nav bar */
-            left: 0;
-            right: 0;
-            margin: 0 auto;
+            left: 50%;
+            transform: translateX(-50%);
             width: calc(100% - 2rem);
             max-width: 28rem; /* 448px */
-            background: rgba(255, 255, 255, 0.2); /* Increased opacity for better visibility */
-            backdrop-filter: blur(15px); /* Increased blur for better effect */
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(139, 122, 184, 0.3); /* Increased opacity of accent color */
+            background: rgba(255, 255, 255, 0.35); /* Increased opacity for better coverage */
+            backdrop-filter: blur(25px) saturate(180%); /* Increased blur for better glassmorphism */
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid rgba(139, 122, 184, 0.4); /* Increased opacity of accent color */
             border-radius: 1rem;
             padding: var(--space-md);
             box-shadow: 0 8px 32px rgba(139, 122, 184, 0.2);
-            z-index: 1999; /* Just below the main nav */
+            z-index: 999; /* Just below the main nav */
             display: none;
             flex-direction: column;
             gap: var(--space-sm);
@@ -1252,6 +1255,11 @@
                     mainContent.style.display = 'block';
                     setTimeout(() => {
                         mainContent.classList.add('visible');
+                        // Show navigation after unlock
+                        const nav = document.querySelector('.nav');
+                        if (nav) {
+                            nav.classList.add('show');
+                        }
                         initializeApp();
                         // Auto-play audio when unlocked
                         const audio = document.getElementById('background-audio');
